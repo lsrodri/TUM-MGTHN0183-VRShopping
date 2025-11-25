@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - ProductBundle
   - WarehouseShelf
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Overlay UI
   - Water
   - UI
   - 
