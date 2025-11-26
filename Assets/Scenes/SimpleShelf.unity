@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 51534165}
   m_Layer: 0
   m_Name: 39
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,7 +273,7 @@ Transform:
   m_GameObject: {fileID: 51534163}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -318,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 55955177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -578,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 75863636}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 84993247}
   m_Layer: 0
   m_Name: 3
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -749,7 +749,7 @@ Transform:
   m_GameObject: {fileID: 84993245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -989,7 +989,7 @@ GameObject:
   - component: {fileID: 110962774}
   m_Layer: 0
   m_Name: 34
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1003,7 +1003,7 @@ Transform:
   m_GameObject: {fileID: 110962772}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1191,7 +1191,7 @@ GameObject:
   - component: {fileID: 161580514}
   m_Layer: 0
   m_Name: 45
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1205,7 +1205,7 @@ Transform:
   m_GameObject: {fileID: 161580512}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 218227392}
   m_Layer: 0
   m_Name: 13
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1665,7 +1665,7 @@ Transform:
   m_GameObject: {fileID: 218227390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1697,7 +1697,7 @@ GameObject:
   - component: {fileID: 218588546}
   m_Layer: 0
   m_Name: 20
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1711,7 +1711,7 @@ Transform:
   m_GameObject: {fileID: 218588544}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1761,7 +1761,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2146815622}
-  - {fileID: 829997841}
   - {fileID: 877724973}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1777,7 +1776,7 @@ GameObject:
   - component: {fileID: 244715434}
   m_Layer: 0
   m_Name: 26
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1791,7 +1790,7 @@ Transform:
   m_GameObject: {fileID: 244715432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1965,7 +1964,7 @@ GameObject:
   - component: {fileID: 293212720}
   m_Layer: 0
   m_Name: 10
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1979,7 +1978,7 @@ Transform:
   m_GameObject: {fileID: 293212718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2202,7 +2201,7 @@ GameObject:
   - component: {fileID: 347130903}
   m_Layer: 0
   m_Name: 38
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2216,7 +2215,7 @@ Transform:
   m_GameObject: {fileID: 347130901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2644,7 +2643,7 @@ GameObject:
   - component: {fileID: 482927134}
   m_Layer: 0
   m_Name: 46
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2658,7 +2657,7 @@ Transform:
   m_GameObject: {fileID: 482927132}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2695,7 +2694,7 @@ GameObject:
   - component: {fileID: 495852847}
   m_Layer: 0
   m_Name: 7
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2709,7 +2708,7 @@ Transform:
   m_GameObject: {fileID: 495852845}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2741,7 +2740,7 @@ GameObject:
   - component: {fileID: 501622049}
   m_Layer: 0
   m_Name: 47
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2755,7 +2754,7 @@ Transform:
   m_GameObject: {fileID: 501622047}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3071,7 +3070,7 @@ GameObject:
   - component: {fileID: 629958249}
   m_Layer: 0
   m_Name: 11
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3085,7 +3084,7 @@ Transform:
   m_GameObject: {fileID: 629958247}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3283,7 +3282,7 @@ GameObject:
   - component: {fileID: 669468729}
   m_Layer: 0
   m_Name: 36
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3297,7 +3296,7 @@ Transform:
   m_GameObject: {fileID: 669468727}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3342,7 +3341,7 @@ Transform:
   m_GameObject: {fileID: 671728665}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3377,7 +3376,7 @@ Transform:
   m_GameObject: {fileID: 696919818}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3583,7 +3582,7 @@ GameObject:
   - component: {fileID: 747092895}
   m_Layer: 0
   m_Name: 1
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3597,7 +3596,7 @@ Transform:
   m_GameObject: {fileID: 747092893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3666,7 +3665,7 @@ GameObject:
   - component: {fileID: 771332746}
   m_Layer: 0
   m_Name: 5
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3680,7 +3679,7 @@ Transform:
   m_GameObject: {fileID: 771332744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3712,7 +3711,7 @@ GameObject:
   - component: {fileID: 779732393}
   m_Layer: 0
   m_Name: 28
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3726,7 +3725,7 @@ Transform:
   m_GameObject: {fileID: 779732391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3966,7 +3965,7 @@ GameObject:
   - component: {fileID: 795889537}
   m_Layer: 0
   m_Name: 19
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3980,7 +3979,7 @@ Transform:
   m_GameObject: {fileID: 795889535}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4012,7 +4011,7 @@ GameObject:
   - component: {fileID: 804231643}
   m_Layer: 0
   m_Name: 29
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4026,7 +4025,7 @@ Transform:
   m_GameObject: {fileID: 804231641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4262,37 +4261,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &829997840
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 829997841}
-  m_Layer: 0
-  m_Name: WarehouseShelves
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &829997841
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829997840}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 240388128}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &860001544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,7 +4273,7 @@ GameObject:
   - component: {fileID: 860001546}
   m_Layer: 0
   m_Name: 8
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4319,7 +4287,7 @@ Transform:
   m_GameObject: {fileID: 860001544}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4510,7 +4478,7 @@ Transform:
   m_GameObject: {fileID: 913547417}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4801,7 +4769,7 @@ GameObject:
   - component: {fileID: 975899008}
   m_Layer: 0
   m_Name: 23
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4815,7 +4783,7 @@ Transform:
   m_GameObject: {fileID: 975899006}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5202,7 +5170,7 @@ Transform:
   m_GameObject: {fileID: 1040702935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5237,7 +5205,7 @@ Transform:
   m_GameObject: {fileID: 1045055814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5330,7 +5298,7 @@ GameObject:
   - component: {fileID: 1128578510}
   m_Layer: 0
   m_Name: 30
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5344,7 +5312,7 @@ Transform:
   m_GameObject: {fileID: 1128578508}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5578,7 +5546,7 @@ GameObject:
   - component: {fileID: 1165959379}
   m_Layer: 0
   m_Name: 27
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5592,7 +5560,7 @@ Transform:
   m_GameObject: {fileID: 1165959377}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5760,7 +5728,7 @@ GameObject:
   - component: {fileID: 1175701340}
   m_Layer: 0
   m_Name: 35
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5774,7 +5742,7 @@ Transform:
   m_GameObject: {fileID: 1175701338}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6181,7 +6149,7 @@ Transform:
   m_GameObject: {fileID: 1237711804}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6357,7 +6325,7 @@ GameObject:
   - component: {fileID: 1300704414}
   m_Layer: 0
   m_Name: 42
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6371,7 +6339,7 @@ Transform:
   m_GameObject: {fileID: 1300704412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6631,7 +6599,7 @@ Transform:
   m_GameObject: {fileID: 1329925111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6780,7 +6748,7 @@ GameObject:
   - component: {fileID: 1337135103}
   m_Layer: 0
   m_Name: 18
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6794,7 +6762,7 @@ Transform:
   m_GameObject: {fileID: 1337135101}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6839,7 +6807,7 @@ Transform:
   m_GameObject: {fileID: 1343075824}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7021,7 +6989,7 @@ Transform:
   m_GameObject: {fileID: 1348739907}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7104,7 +7072,7 @@ GameObject:
   - component: {fileID: 1359348639}
   m_Layer: 0
   m_Name: 12
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7118,7 +7086,7 @@ Transform:
   m_GameObject: {fileID: 1359348637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7155,7 +7123,7 @@ GameObject:
   - component: {fileID: 1412085741}
   m_Layer: 0
   m_Name: 24
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7169,7 +7137,7 @@ Transform:
   m_GameObject: {fileID: 1412085739}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7336,7 +7304,7 @@ Transform:
   m_GameObject: {fileID: 1490290734}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.907, y: 0.8871618, z: 8.5089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7358,7 +7326,7 @@ GameObject:
   - component: {fileID: 1512028003}
   m_Layer: 0
   m_Name: 43
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7372,7 +7340,7 @@ Transform:
   m_GameObject: {fileID: 1512028001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7497,7 +7465,7 @@ GameObject:
   - component: {fileID: 1526125762}
   m_Layer: 0
   m_Name: 21
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7511,7 +7479,7 @@ Transform:
   m_GameObject: {fileID: 1526125760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7858,7 +7826,7 @@ GameObject:
   - component: {fileID: 1591197651}
   m_Layer: 0
   m_Name: 40
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7872,7 +7840,7 @@ Transform:
   m_GameObject: {fileID: 1591197649}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7904,7 +7872,7 @@ GameObject:
   - component: {fileID: 1606671889}
   m_Layer: 0
   m_Name: 16
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7918,7 +7886,7 @@ Transform:
   m_GameObject: {fileID: 1606671887}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7987,7 +7955,7 @@ GameObject:
   - component: {fileID: 1636880568}
   m_Layer: 0
   m_Name: 15
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8001,7 +7969,7 @@ Transform:
   m_GameObject: {fileID: 1636880566}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8033,7 +8001,7 @@ GameObject:
   - component: {fileID: 1638290498}
   m_Layer: 0
   m_Name: 6
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8047,7 +8015,7 @@ Transform:
   m_GameObject: {fileID: 1638290496}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8079,7 +8047,7 @@ GameObject:
   - component: {fileID: 1639807647}
   m_Layer: 0
   m_Name: 37
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8093,7 +8061,7 @@ Transform:
   m_GameObject: {fileID: 1639807645}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8342,7 +8310,7 @@ GameObject:
   - component: {fileID: 1680046971}
   m_Layer: 0
   m_Name: 41
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8356,7 +8324,7 @@ Transform:
   m_GameObject: {fileID: 1680046969}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8437,7 +8405,7 @@ GameObject:
   - component: {fileID: 1681288576}
   m_Layer: 0
   m_Name: 17
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8451,7 +8419,7 @@ Transform:
   m_GameObject: {fileID: 1681288574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8724,7 +8692,7 @@ GameObject:
   - component: {fileID: 1736868027}
   m_Layer: 0
   m_Name: 48
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8738,7 +8706,7 @@ Transform:
   m_GameObject: {fileID: 1736868025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8869,7 +8837,7 @@ GameObject:
   - component: {fileID: 1786664941}
   m_Layer: 0
   m_Name: 25
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8883,7 +8851,7 @@ Transform:
   m_GameObject: {fileID: 1786664939}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8915,7 +8883,7 @@ GameObject:
   - component: {fileID: 1807053650}
   m_Layer: 0
   m_Name: 9
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8929,7 +8897,7 @@ Transform:
   m_GameObject: {fileID: 1807053648}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9191,7 +9159,7 @@ GameObject:
   - component: {fileID: 1867733286}
   m_Layer: 0
   m_Name: 4
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9205,7 +9173,7 @@ Transform:
   m_GameObject: {fileID: 1867733284}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9384,7 +9352,7 @@ GameObject:
   - component: {fileID: 1877864206}
   m_Layer: 0
   m_Name: 2
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9398,7 +9366,7 @@ Transform:
   m_GameObject: {fileID: 1877864204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9739,7 +9707,7 @@ GameObject:
   - component: {fileID: 1908597727}
   m_Layer: 0
   m_Name: 22
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9753,7 +9721,7 @@ Transform:
   m_GameObject: {fileID: 1908597725}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9846,7 +9814,7 @@ GameObject:
   - component: {fileID: 1915752169}
   m_Layer: 0
   m_Name: 32
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9860,7 +9828,7 @@ Transform:
   m_GameObject: {fileID: 1915752167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9892,7 +9860,7 @@ GameObject:
   - component: {fileID: 1921427670}
   m_Layer: 0
   m_Name: 33
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9906,7 +9874,7 @@ Transform:
   m_GameObject: {fileID: 1921427668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.565, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.67783827, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9938,7 +9906,7 @@ GameObject:
   - component: {fileID: 1921653079}
   m_Layer: 0
   m_Name: 14
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9952,7 +9920,7 @@ Transform:
   m_GameObject: {fileID: 1921653077}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 1.116, z: -8.5089}
+  m_LocalPosition: {x: 0, y: 0.22883838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10514,7 +10482,7 @@ GameObject:
   - component: {fileID: 2054977462}
   m_Layer: 0
   m_Name: 31
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10528,7 +10496,7 @@ Transform:
   m_GameObject: {fileID: 2054977460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.66550714, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.22165465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10560,7 +10528,7 @@ GameObject:
   - component: {fileID: 2056276355}
   m_Layer: 0
   m_Name: 44
-  m_TagString: WarehouseShelf
+  m_TagString: ProductBundle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10574,7 +10542,7 @@ Transform:
   m_GameObject: {fileID: 2056276353}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000029653306, z: -0, w: 1}
-  m_LocalPosition: {x: 14.907, y: 0.20213991, z: -8.5089}
+  m_LocalPosition: {x: 0, y: -0.6850219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
