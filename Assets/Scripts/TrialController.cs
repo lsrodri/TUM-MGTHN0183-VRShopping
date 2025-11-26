@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TMPro; // Required for TextMeshPro
+using UnityEngine.Networking; // Required for Android/Quest Loading
+using TMPro;
 
 public class TrialController : MonoBehaviour
 {
@@ -28,13 +30,11 @@ public class TrialController : MonoBehaviour
 
     // --- Internal Data Structures ---
 
-    // 1. The Experiment Logic (From Trials.csv)
     [System.Serializable]
     public class TrialData
     {
         public int participantID;
         public int trialNumber;
-
         public int shelfOneProductID;
         public int shelfTwoProductID;
         public int shelfThreeProductID;
@@ -42,80 +42,104 @@ public class TrialController : MonoBehaviour
     }
     private List<TrialData> allTrials = new List<TrialData>();
 
-    // 2. The Product Database (From Products.csv)
-    // Key: ProductID, Value: Price
     private Dictionary<int, float> priceDatabase = new Dictionary<int, float>();
-
-    // 3. The Scene Inventory (From Hierarchy)
-    // Key: ProductID, Value: The Physical GameObject Script
     private Dictionary<int, TrialProduct> sceneInventory = new Dictionary<int, TrialProduct>();
-
-    // Track what is currently showing to hide it later
     private List<TrialProduct> activeProducts = new List<TrialProduct>();
 
 
     void Start()
     {
-        // 1. Load Preferences (Defaults to 1)
+        // 1. Load Preferences
         currentParticipantID = PlayerPrefs.GetInt("ParticipantID", 1);
         currentTrialNumber = PlayerPrefs.GetInt("TrialNumber", 1);
 
         Debug.Log($"Initializing TrialController... P:{currentParticipantID}, T:{currentTrialNumber}");
 
-        // 2. Index the physical objects in the scene
+        // 2. Index the physical objects (Synchronous)
         IndexSceneInventory();
 
-        // 3. Load the Data Files
-        LoadProductDatabase();
-        bool trialsLoaded = LoadTrialsCSV();
+        // 3. Start Async Loading for CSVs
+        StartCoroutine(InitializeExperiment());
+    }
 
-        // 4. Start Experiment
-        if (trialsLoaded)
+    // --- ASYNC LOADER (Required for Android/Quest) ---
+    IEnumerator InitializeExperiment()
+    {
+        // A. Load Products.csv
+        string productsPath = Path.Combine(Application.streamingAssetsPath, productsCsvName);
+        string productsContent = "";
+
+        // Check if we need UnityWebRequest (Android/WebGL) or System.IO (Editor/PC)
+        if (productsPath.Contains("://") || productsPath.Contains("jar:"))
+        {
+            UnityWebRequest www = UnityWebRequest.Get(productsPath);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Failed to load Products.csv: {www.error}");
+            }
+            else
+            {
+                productsContent = www.downloadHandler.text;
+            }
+        }
+        else
+        {
+            // PC / Editor Fallback
+            if (File.Exists(productsPath)) productsContent = File.ReadAllText(productsPath);
+            else Debug.LogError($"Products.csv not found at {productsPath}");
+        }
+
+        // Parse Products
+        ParseProductDatabase(productsContent);
+
+
+        // B. Load Trials.csv
+        string trialsPath = Path.Combine(Application.streamingAssetsPath, trialsCsvName);
+        string trialsContent = "";
+
+        if (trialsPath.Contains("://") || trialsPath.Contains("jar:"))
+        {
+            UnityWebRequest www = UnityWebRequest.Get(trialsPath);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Failed to load Trials.csv: {www.error}");
+            }
+            else
+            {
+                trialsContent = www.downloadHandler.text;
+            }
+        }
+        else
+        {
+            if (File.Exists(trialsPath)) trialsContent = File.ReadAllText(trialsPath);
+            else Debug.LogError($"Trials.csv not found at {trialsPath}");
+        }
+
+        // Parse Trials and Run
+        if (ParseTrialsCSV(trialsContent))
         {
             RunTrial(currentParticipantID, currentTrialNumber);
         }
     }
 
-    // --- Step A: Indexing ---
-    void IndexSceneInventory()
+
+    // --- PARSING LOGIC ---
+
+    void ParseProductDatabase(string csvText)
     {
-        // Find all TrialProduct scripts, even if disabled
-        var products = FindObjectsByType<TrialProduct>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        if (string.IsNullOrEmpty(csvText)) return;
 
-        foreach (var p in products)
-        {
-            p.gameObject.SetActive(false); // Hide everything initially
+        // Handle different line endings (Windows \r\n vs Unix \n)
+        string[] lines = csvText.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
 
-            if (!sceneInventory.ContainsKey(p.productID))
-            {
-                sceneInventory.Add(p.productID, p);
-            }
-            else
-            {
-                Debug.LogWarning($"Duplicate Product ID {p.productID} found on object '{p.name}'. Check your scene!");
-            }
-        }
-        Debug.Log($"Inventory Indexed: Found {sceneInventory.Count} physical products.");
-    }
-
-    // --- Step B: Loading Data ---
-    void LoadProductDatabase()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, productsCsvName);
-        if (!File.Exists(path))
-        {
-            Debug.LogError($"Product Database not found at {path}");
-            return;
-        }
-
-        string[] lines = File.ReadAllLines(path);
-        // Skip Header (Row 0)
+        // Skip Header (i=1)
         for (int i = 1; i < lines.Length; i++)
         {
-            string line = lines[i];
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            string[] cols = line.Split(',');
-
+            string[] cols = lines[i].Split(',');
             if (cols.Length < 3) continue;
 
             // Format: ID, Name, Price
@@ -125,30 +149,21 @@ public class TrialController : MonoBehaviour
                     priceDatabase.Add(id, price);
             }
         }
-        Debug.Log($"Product DB Loaded: {priceDatabase.Count} prices defined.");
+        Debug.Log($"Product DB Loaded: {priceDatabase.Count} entries.");
     }
 
-    bool LoadTrialsCSV()
+    bool ParseTrialsCSV(string csvText)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, trialsCsvName);
-        if (!File.Exists(path))
-        {
-            Debug.LogError($"Trials file not found at {path}");
-            return false;
-        }
+        if (string.IsNullOrEmpty(csvText)) return false;
 
-        string[] lines = File.ReadAllLines(path);
-        // Skip Header
+        string[] lines = csvText.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+
         for (int i = 1; i < lines.Length; i++)
         {
-            string line = lines[i];
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            string[] cols = line.Split(',');
-
+            string[] cols = lines[i].Split(',');
             if (cols.Length < 6) continue;
 
             TrialData t = new TrialData();
-            // Parse Columns
             int.TryParse(cols[0], out t.participantID);
             int.TryParse(cols[1], out t.trialNumber);
             int.TryParse(cols[2], out t.shelfOneProductID);
@@ -162,20 +177,31 @@ public class TrialController : MonoBehaviour
         return true;
     }
 
-    // --- Step C: Running Logic ---
+
+    // --- SCENE LOGIC (Unchanged) ---
+
+    void IndexSceneInventory()
+    {
+        var products = FindObjectsByType<TrialProduct>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (var p in products)
+        {
+            p.gameObject.SetActive(false);
+            if (!sceneInventory.ContainsKey(p.productID))
+                sceneInventory.Add(p.productID, p);
+        }
+    }
+
     public void RunTrial(int pID, int trialNum)
     {
-        // 1. Clear previous scene state
         foreach (var p in activeProducts) p.gameObject.SetActive(false);
         activeProducts.Clear();
 
-        // 2. Find Trial Data
         TrialData data = allTrials.Find(t => t.participantID == pID && t.trialNumber == trialNum);
 
         if (data == null)
         {
-            Debug.Log($"No data found for Participant {pID}, Trial {trialNum}. Experiment Finished?");
-            // Optional: Clear labels if finished
+            Debug.Log($"No data for P:{pID} T:{trialNum}. Experiment Complete?");
             if (shelfOneLabel) shelfOneLabel.text = "";
             if (shelfTwoLabel) shelfTwoLabel.text = "";
             if (shelfThreeLabel) shelfThreeLabel.text = "";
@@ -185,7 +211,6 @@ public class TrialController : MonoBehaviour
 
         Debug.Log($"Running Trial {trialNum}...");
 
-        // 3. Execute Placement (Pass Label with Position)
         PlaceProductOnShelf(data.shelfOneProductID, shelfOnePosition, shelfOneLabel);
         PlaceProductOnShelf(data.shelfTwoProductID, shelfTwoPosition, shelfTwoLabel);
         PlaceProductOnShelf(data.shelfThreeProductID, shelfThreePosition, shelfThreeLabel);
@@ -194,38 +219,21 @@ public class TrialController : MonoBehaviour
 
     void PlaceProductOnShelf(int productID, Transform shelfSlot, TextMeshPro shelfLabel)
     {
-        // A. Find the physical object
         if (sceneInventory.TryGetValue(productID, out TrialProduct product))
         {
-            // B. Move it
-            product.transform.SetParent(null); // Detach to avoid scale issues
+            product.transform.SetParent(null);
             product.transform.position = shelfSlot.position;
             product.transform.rotation = shelfSlot.rotation;
             product.gameObject.SetActive(true);
-
             activeProducts.Add(product);
 
-            // C. Look up Price
-            float price = 0f;
-            if (priceDatabase.ContainsKey(productID))
-            {
-                price = priceDatabase[productID];
-            }
-            else
-            {
-                Debug.LogWarning($"Price missing for Product {productID}, defaulting to 0.");
-            }
+            float price = priceDatabase.ContainsKey(productID) ? priceDatabase[productID] : 0f;
 
-            // D. Update the SHELF Label
-            if (shelfLabel != null)
-            {
-                shelfLabel.text = price.ToString("F2");
-            }
+            if (shelfLabel != null) shelfLabel.text = price.ToString("F2");
         }
         else
         {
-            Debug.LogError($"CRITICAL: Trial asks for Product {productID}, but it is not in the Scene Inventory!");
-            // Clear label if missing
+            Debug.LogError($"Missing Product ID {productID}!");
             if (shelfLabel != null) shelfLabel.text = "---";
         }
     }
