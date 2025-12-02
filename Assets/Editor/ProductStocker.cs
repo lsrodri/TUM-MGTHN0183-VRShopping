@@ -1,21 +1,23 @@
-using UnityEngine;
-using UnityEditor;
+﻿using Oculus.Interaction; // Meta Interaction SDK namespace
+using Oculus.Interaction.HandGrab;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 public class ProductStocker : EditorWindow
 {
     // State variables
     string targetID = "";
+    bool makeGrabbable = true; // Default checked
     const string PREF_LAST_DIR = "VRClass_LastProductDir";
 
     [MenuItem("Tools/VR Research/Stock Shelf with Product %g")] // Ctrl+G
     public static void ShowWindow()
     {
-        // Open a small utility window
         ProductStocker window = GetWindow<ProductStocker>("Stock Shelf");
-        window.minSize = new Vector2(300, 150);
-        window.maxSize = new Vector2(500, 150);
+        window.minSize = new Vector2(300, 180);
+        window.maxSize = new Vector2(500, 180);
     }
 
     void OnGUI()
@@ -24,9 +26,11 @@ public class ProductStocker : EditorWindow
         GUILayout.Label("Product Assignment Settings", EditorStyles.boldLabel);
         GUILayout.Space(5);
 
-        // 1. The Prompt
         targetID = EditorGUILayout.TextField("Specific ID (Optional):", targetID);
         GUILayout.Label("Leave empty to fill the next available slot.", EditorStyles.miniLabel);
+
+        GUILayout.Space(10);
+        makeGrabbable = EditorGUILayout.Toggle("Make Grabbable (VR)", makeGrabbable);
 
         GUILayout.Space(15);
 
@@ -40,37 +44,30 @@ public class ProductStocker : EditorWindow
     {
         Transform targetSlot = null;
 
-        // 2. Logic: Determine Target Slot
+        // Determine Target Slot
         if (!string.IsNullOrEmpty(targetID))
         {
-            // CASE A: Specific ID requested
             GameObject foundObj = GameObject.Find(targetID);
 
-            // Verify it exists and is a valid slot
             if (foundObj == null || !foundObj.CompareTag("ProductBundle"))
             {
                 EditorUtility.DisplayDialog("Error", $"Slot ID '{targetID}' not found (or not tagged ProductBundle).", "OK");
                 return;
             }
 
-            // Verify it is empty
             if (foundObj.transform.childCount > 0)
             {
                 EditorUtility.DisplayDialog("Slot Occupied",
                     $"Slot '{targetID}' is already full.\n\nPlease manually remove the items if you wish to replace them.",
                     "OK");
-                return; // Kill process
+                return;
             }
 
             targetSlot = foundObj.transform;
         }
         else
         {
-            // CASE B: Auto-fill next empty
             GameObject[] allShelves = GameObject.FindGameObjectsWithTag("ProductBundle");
-
-            // Sort numerically/alphabetically so we fill 1, then 2, then 3...
-            // Using a natural sort helper or simple string compare
             System.Array.Sort(allShelves, (a, b) => CompareNatural(a.name, b.name));
 
             foreach (var shelf in allShelves)
@@ -89,7 +86,7 @@ public class ProductStocker : EditorWindow
             }
         }
 
-        // 3. File Picker (Memory)
+        // File Picker
         string lastDir = EditorPrefs.GetString(PREF_LAST_DIR, "Assets");
         if (!System.IO.Directory.Exists(lastDir)) lastDir = "Assets";
 
@@ -103,33 +100,107 @@ public class ProductStocker : EditorWindow
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         if (prefab == null) return;
 
-        // 4. Instantiate & Parent
+        // Instantiate & Parent
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         Undo.RegisterCreatedObjectUndo(instance, "Stock Shelf");
 
         Undo.SetTransformParent(instance.transform, targetSlot, "Parent to Slot");
 
-        // Reset Transform initially
         instance.transform.localRotation = Quaternion.identity;
         instance.transform.localPosition = Vector3.zero;
-        instance.transform.localScale = Vector3.one; // Ensure scale is 1
+        instance.transform.localScale = Vector3.one;
 
-        // 5. Z-Alignment Calculation
+        // Unpack prefab if making grabbable
+        if (makeGrabbable)
+        {
+            PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            MakeGrabbable(instance);
+        }
+
+        // Z-Alignment
         ApplyZAlignment(instance);
 
         // Focus
-        Selection.activeGameObject = targetSlot.gameObject; // Select the Parent (ID)
+        Selection.activeGameObject = targetSlot.gameObject;
         if (SceneView.lastActiveSceneView != null) SceneView.lastActiveSceneView.FrameSelected();
 
-        // Close window after success (optional, remove if you want to spam-add)
         Close();
     }
 
-    // --- Helper: Auto-Align Z ---
-    // --- Helper: Auto-Align Z (Negative Direction) ---
+    void MakeGrabbable(GameObject obj)
+    {
+        // 1. Ensure Collider exists
+        Collider collider = obj.GetComponent<Collider>();
+        if (collider == null)
+        {
+            MeshCollider meshCollider = Undo.AddComponent<MeshCollider>(obj);
+            meshCollider.convex = true;
+            collider = meshCollider;
+            Debug.Log($"Added MeshCollider (convex) to {obj.name}");
+        }
+        else if (collider is MeshCollider meshCol)
+        {
+            Undo.RecordObject(meshCol, "Set Convex");
+            meshCol.convex = true;
+            Debug.Log($"Set existing MeshCollider to convex on {obj.name}");
+        }
+
+        // 2. Add/Configure Rigidbody
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = Undo.AddComponent<Rigidbody>(obj);
+        }
+        else
+        {
+            Undo.RecordObject(rb, "Configure Rigidbody");
+        }
+        rb.useGravity = false;
+        rb.isKinematic = true;
+
+        // 3. Add Grabbable Component
+        Grabbable grabbable = Undo.AddComponent<Grabbable>(obj);
+
+        // Use SerializedObject to set private fields
+        SerializedObject soGrabbable = new SerializedObject(grabbable);
+        soGrabbable.FindProperty("_targetTransform").objectReferenceValue = obj.transform;
+        soGrabbable.ApplyModifiedProperties();
+
+        // Set public property
+        grabbable.InjectOptionalTargetTransform(obj.transform);
+
+        Debug.Log($"Added Grabbable to {obj.name}");
+
+        // 4. Create Child Interaction GameObject
+        GameObject interactionChild = new GameObject("ISDK_HandGrabInteraction");
+        Undo.RegisterCreatedObjectUndo(interactionChild, "Create Interaction Child");
+        Undo.SetTransformParent(interactionChild.transform, obj.transform, "Parent Interaction");
+
+        interactionChild.transform.localPosition = Vector3.zero;
+        interactionChild.transform.localRotation = Quaternion.identity;
+        interactionChild.transform.localScale = Vector3.one;
+
+        // 5. Add HandGrabInteractable
+        HandGrabInteractable handGrab = Undo.AddComponent<HandGrabInteractable>(interactionChild);
+
+        SerializedObject soHandGrab = new SerializedObject(handGrab);
+        soHandGrab.FindProperty("_pointableElement").objectReferenceValue = grabbable;
+        soHandGrab.FindProperty("_rigidbody").objectReferenceValue = rb;
+        soHandGrab.ApplyModifiedProperties();
+
+        // 6. Add GrabInteractable
+        GrabInteractable grabInteractable = Undo.AddComponent<GrabInteractable>(interactionChild);
+
+        SerializedObject soGrabInteractable = new SerializedObject(grabInteractable);
+        soGrabInteractable.FindProperty("_pointableElement").objectReferenceValue = grabbable;
+        soGrabInteractable.FindProperty("_rigidbody").objectReferenceValue = rb;
+        soGrabInteractable.ApplyModifiedProperties();
+
+        Debug.Log($"✓ Made {obj.name} grabbable with Hand & Controller support");
+    }
+
     void ApplyZAlignment(GameObject obj)
     {
-        // 1. Calculate Bounds
         Bounds combinedBounds = new Bounds(obj.transform.position, Vector3.zero);
         Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
 
@@ -141,26 +212,23 @@ public class ProductStocker : EditorWindow
             else combinedBounds.Encapsulate(r.bounds);
         }
 
-        // 2. Calculate Offset
-        // Current Scenario: Shelf edge is at Z=0. Inside of shelf is Negative Z.
-        // Problem: Object pivot is center. Object Max Z sticks out to +0.1. Object Min Z is at -0.1.
-        // Goal: Move object so its Max Z (the face) is exactly at Z=0.
-
-        // Formula:
-        // pivotToMaxZ = combinedBounds.max.z - obj.transform.position.z; (e.g. +0.1)
-        // We want to move BACK by this amount.
-
+        // Z-axis alignment (existing code)
         float pivotToMaxZ = combinedBounds.max.z - obj.transform.position.z;
-        float pushAmount = -pivotToMaxZ;
+        float pushAmountZ = -pivotToMaxZ;
 
-        // Apply the offset
-        obj.transform.localPosition = new Vector3(0, 0, pushAmount);
+        // Y-axis alignment (NEW)
+        // Calculate how far the pivot is from the bottom of the object
+        float pivotToMinY = combinedBounds.min.y - obj.transform.position.y;
+        // Move the object up so its bottom sits exactly at Y=0
+        float pushAmountY = -pivotToMinY;
 
-        Debug.Log($"Aligned {obj.name}: Pushed Z by {pushAmount:F4}m (Negative) to sit inside shelf.");
+        // Apply both offsets
+        obj.transform.localPosition = new Vector3(0, pushAmountY, pushAmountZ);
+
+        Debug.Log($"Aligned {obj.name}: Y offset={pushAmountY:F4}m, Z offset={pushAmountZ:F4}m");
     }
 
 
-    // --- Helper: Natural Sort (handles "1", "2", "10" correctly) ---
     int CompareNatural(string a, string b)
     {
         return EditorUtility.NaturalCompare(a, b);

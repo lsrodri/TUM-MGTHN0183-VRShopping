@@ -227,6 +227,18 @@ public class TrialController : MonoBehaviour
             product.gameObject.SetActive(true);
             activeProducts.Add(product);
 
+            // Loop through all children and configure their Rigidbody components
+            foreach (Transform child in product.transform)
+            {
+                Rigidbody rb = child.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+                    rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                }
+            }
+
             float price = priceDatabase.ContainsKey(productID) ? priceDatabase[productID] : 0f;
 
             if (shelfLabel != null) shelfLabel.text = price.ToString("F2");
