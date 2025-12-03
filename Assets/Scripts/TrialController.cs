@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine.Networking; // Required for Android/Quest Loading
+using UnityEngine.Networking;
 using TMPro;
 
 public class TrialController : MonoBehaviour
@@ -18,18 +18,30 @@ public class TrialController : MonoBehaviour
     public Transform shelfThreePosition;
     public Transform shelfFourPosition;
 
-    [Header("Shelf Price Tags (Drag TextMeshPro objects here)")]
+    [Header("Shelf Price Tags")]
     public TextMeshPro shelfOneLabel;
     public TextMeshPro shelfTwoLabel;
     public TextMeshPro shelfThreeLabel;
     public TextMeshPro shelfFourLabel;
 
     [Header("Status")]
-    public int currentParticipantID;
-    public int currentTrialNumber;
+    [Tooltip("Leave at -1 to use saved value. Enter number to override.")]
+    [SerializeField] private int overrideParticipantID = -1;
+    [Tooltip("Leave at -1 to use saved value. Enter number to override.")]
+    [SerializeField] private int overrideTrialNumber = -1;
+
+    [Header("Active Values (Read Only)")]
+    [SerializeField] private int currentParticipantID; // Remove 'public', make serialized for inspector viewing
+    [SerializeField] private int currentTrialNumber;
+
+    // Keep public getters for other scripts
+    public int CurrentParticipantID => currentParticipantID;
+    public int CurrentTrialNumber => currentTrialNumber;
+
+    // --- NEW: Track purchased products ---
+    private HashSet<TrialProduct> purchasedProducts = new HashSet<TrialProduct>();
 
     // --- Internal Data Structures ---
-
     [System.Serializable]
     public class TrialData
     {
@@ -46,30 +58,56 @@ public class TrialController : MonoBehaviour
     private Dictionary<int, TrialProduct> sceneInventory = new Dictionary<int, TrialProduct>();
     private List<TrialProduct> activeProducts = new List<TrialProduct>();
 
+    // --- NEW: Public method for AddToCart to call ---
+    public void MarkProductAsPurchased(TrialProduct product)
+    {
+        if (!purchasedProducts.Contains(product))
+        {
+            purchasedProducts.Add(product);
+            activeProducts.Remove(product); // Remove from active list
+            Debug.Log($"Product {product.productID} marked as purchased");
+        }
+    }
 
     void Start()
     {
-        // 1. Load Preferences
-        currentParticipantID = PlayerPrefs.GetInt("ParticipantID", 1);
-        currentTrialNumber = PlayerPrefs.GetInt("TrialNumber", 1);
+        // Apply override logic
+        if (overrideParticipantID > 0)
+        {
+            currentParticipantID = overrideParticipantID;
+            PlayerPrefs.SetInt("ParticipantID", currentParticipantID);
+            Debug.LogWarning($" OVERRIDE: Using Participant ID {currentParticipantID}");
+        }
+        else
+        {
+            currentParticipantID = PlayerPrefs.GetInt("ParticipantID", 1);
+        }
+
+        if (overrideTrialNumber > 0)
+        {
+            currentTrialNumber = overrideTrialNumber;
+            PlayerPrefs.SetInt("TrialNumber", currentTrialNumber);
+            Debug.LogWarning($" OVERRIDE: Using Trial Number {currentTrialNumber}");
+        }
+        else
+        {
+            currentTrialNumber = PlayerPrefs.GetInt("TrialNumber", 1);
+        }
+
+        PlayerPrefs.Save();
 
         Debug.Log($"Initializing TrialController... P:{currentParticipantID}, T:{currentTrialNumber}");
 
-        // 2. Index the physical objects (Synchronous)
         IndexSceneInventory();
-
-        // 3. Start Async Loading for CSVs
         StartCoroutine(InitializeExperiment());
     }
 
-    // --- ASYNC LOADER (Required for Android/Quest) ---
     IEnumerator InitializeExperiment()
     {
-        // A. Load Products.csv
+        // Load Products.csv
         string productsPath = Path.Combine(Application.streamingAssetsPath, productsCsvName);
         string productsContent = "";
 
-        // Check if we need UnityWebRequest (Android/WebGL) or System.IO (Editor/PC)
         if (productsPath.Contains("://") || productsPath.Contains("jar:"))
         {
             UnityWebRequest www = UnityWebRequest.Get(productsPath);
@@ -86,16 +124,13 @@ public class TrialController : MonoBehaviour
         }
         else
         {
-            // PC / Editor Fallback
             if (File.Exists(productsPath)) productsContent = File.ReadAllText(productsPath);
             else Debug.LogError($"Products.csv not found at {productsPath}");
         }
 
-        // Parse Products
         ParseProductDatabase(productsContent);
 
-
-        // B. Load Trials.csv
+        // Load Trials.csv
         string trialsPath = Path.Combine(Application.streamingAssetsPath, trialsCsvName);
         string trialsContent = "";
 
@@ -119,30 +154,23 @@ public class TrialController : MonoBehaviour
             else Debug.LogError($"Trials.csv not found at {trialsPath}");
         }
 
-        // Parse Trials and Run
         if (ParseTrialsCSV(trialsContent))
         {
             RunTrial(currentParticipantID, currentTrialNumber);
         }
     }
 
-
-    // --- PARSING LOGIC ---
-
     void ParseProductDatabase(string csvText)
     {
         if (string.IsNullOrEmpty(csvText)) return;
 
-        // Handle different line endings (Windows \r\n vs Unix \n)
         string[] lines = csvText.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
 
-        // Skip Header (i=1)
         for (int i = 1; i < lines.Length; i++)
         {
             string[] cols = lines[i].Split(',');
             if (cols.Length < 3) continue;
 
-            // Format: ID, Name, Price
             if (int.TryParse(cols[0], out int id) && float.TryParse(cols[2], out float price))
             {
                 if (!priceDatabase.ContainsKey(id))
@@ -177,9 +205,6 @@ public class TrialController : MonoBehaviour
         return true;
     }
 
-
-    // --- SCENE LOGIC (Unchanged) ---
-
     void IndexSceneInventory()
     {
         var products = FindObjectsByType<TrialProduct>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -194,7 +219,14 @@ public class TrialController : MonoBehaviour
 
     public void RunTrial(int pID, int trialNum)
     {
-        foreach (var p in activeProducts) p.gameObject.SetActive(false);
+        // MODIFIED: Only deactivate non-purchased products
+        foreach (var p in activeProducts)
+        {
+            if (!purchasedProducts.Contains(p))
+            {
+                p.gameObject.SetActive(false);
+            }
+        }
         activeProducts.Clear();
 
         TrialData data = allTrials.Find(t => t.participantID == pID && t.trialNumber == trialNum);
@@ -221,13 +253,20 @@ public class TrialController : MonoBehaviour
     {
         if (sceneInventory.TryGetValue(productID, out TrialProduct product))
         {
+            // MODIFIED: Skip if product was already purchased
+            if (purchasedProducts.Contains(product))
+            {
+                Debug.Log($"Product {productID} already purchased, skipping placement.");
+                if (shelfLabel != null) shelfLabel.text = "SOLD";
+                return;
+            }
+
             product.transform.SetParent(null);
             product.transform.position = shelfSlot.position;
             product.transform.rotation = shelfSlot.rotation;
             product.gameObject.SetActive(true);
             activeProducts.Add(product);
 
-            // Loop through all children and configure their Rigidbody components
             foreach (Transform child in product.transform)
             {
                 Rigidbody rb = child.GetComponent<Rigidbody>();
@@ -256,5 +295,16 @@ public class TrialController : MonoBehaviour
         PlayerPrefs.SetInt("TrialNumber", currentTrialNumber);
         PlayerPrefs.Save();
         RunTrial(currentParticipantID, currentTrialNumber);
+    }
+
+    // NEW: Optional - Reset purchased products for new participant
+    public void ResetPurchasedProducts()
+    {
+        foreach (var p in purchasedProducts)
+        {
+            p.gameObject.SetActive(false);
+        }
+        purchasedProducts.Clear();
+        Debug.Log("Purchased products reset.");
     }
 }

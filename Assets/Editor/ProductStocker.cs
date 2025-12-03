@@ -110,12 +110,15 @@ public class ProductStocker : EditorWindow
         instance.transform.localPosition = Vector3.zero;
         instance.transform.localScale = Vector3.one;
 
-        // Unpack prefab if making grabbable
+        // Unpack prefab
         if (makeGrabbable)
         {
             PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
             MakeGrabbable(instance);
         }
+
+        // Add ProductData and assign ID
+        AddProductData(instance, targetSlot);
 
         // Z-Alignment
         ApplyZAlignment(instance);
@@ -129,20 +132,75 @@ public class ProductStocker : EditorWindow
 
     void MakeGrabbable(GameObject obj)
     {
-        // 1. Ensure Collider exists
+        // 1. Ensure Collider exists with proper mesh assignment
         Collider collider = obj.GetComponent<Collider>();
+
         if (collider == null)
         {
-            MeshCollider meshCollider = Undo.AddComponent<MeshCollider>(obj);
-            meshCollider.convex = true;
-            collider = meshCollider;
-            Debug.Log($"Added MeshCollider (convex) to {obj.name}");
+            // Try to add MeshCollider with mesh from MeshFilter
+            MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
+
+            if (meshFilter != null && meshFilter.sharedMesh != null)
+            {
+                MeshCollider meshCollider = Undo.AddComponent<MeshCollider>(obj);
+                meshCollider.sharedMesh = meshFilter.sharedMesh; // CRITICAL: Assign the mesh
+                meshCollider.convex = true;
+                collider = meshCollider;
+                Debug.Log($"✓ Added MeshCollider with mesh '{meshFilter.sharedMesh.name}' to {obj.name}");
+            }
+            else
+            {
+                // No valid mesh - try primitive collider fallback
+                Renderer renderer = obj.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    BoxCollider boxCollider = Undo.AddComponent<BoxCollider>(obj);
+                    collider = boxCollider;
+                    Debug.LogWarning($"⚠ No MeshFilter found on {obj.name}. Added BoxCollider as fallback.");
+                }
+                else
+                {
+                    // CRITICAL ERROR: Can't make grabbable without collider
+                    EditorUtility.DisplayDialog("Cannot Make Grabbable",
+                        $"Object '{obj.name}' has no MeshFilter or Renderer.\n\n" +
+                        "Cannot create collider. Please add geometry to this object or uncheck 'Make Grabbable'.",
+                        "OK");
+
+                    Debug.LogError($"❌ FAILED: {obj.name} cannot be made grabbable - no mesh or renderer found!");
+                    return; // Abort grabbable setup
+                }
+            }
         }
         else if (collider is MeshCollider meshCol)
         {
-            Undo.RecordObject(meshCol, "Set Convex");
-            meshCol.convex = true;
-            Debug.Log($"Set existing MeshCollider to convex on {obj.name}");
+            // Existing MeshCollider - validate it has a mesh
+            if (meshCol.sharedMesh == null)
+            {
+                MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
+                if (meshFilter != null && meshFilter.sharedMesh != null)
+                {
+                    Undo.RecordObject(meshCol, "Assign Mesh to Collider");
+                    meshCol.sharedMesh = meshFilter.sharedMesh;
+                    meshCol.convex = true;
+                    Debug.Log($"✓ Assigned mesh '{meshFilter.sharedMesh.name}' to existing MeshCollider on {obj.name}");
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Invalid MeshCollider",
+                        $"Object '{obj.name}' has a MeshCollider but no mesh assigned.\n\n" +
+                        "Cannot make grabbable without a valid mesh.",
+                        "OK");
+
+                    Debug.LogError($"❌ FAILED: {obj.name} has MeshCollider but no mesh available!");
+                    return;
+                }
+            }
+            else
+            {
+                Undo.RecordObject(meshCol, "Set Convex");
+                meshCol.convex = true;
+                Debug.Log($"✓ Set existing MeshCollider to convex on {obj.name}");
+            }
         }
 
         // 2. Add/Configure Rigidbody
@@ -161,15 +219,13 @@ public class ProductStocker : EditorWindow
         // 3. Add Grabbable Component
         Grabbable grabbable = Undo.AddComponent<Grabbable>(obj);
 
-        // Use SerializedObject to set private fields
         SerializedObject soGrabbable = new SerializedObject(grabbable);
         soGrabbable.FindProperty("_targetTransform").objectReferenceValue = obj.transform;
         soGrabbable.ApplyModifiedProperties();
 
-        // Set public property
         grabbable.InjectOptionalTargetTransform(obj.transform);
 
-        Debug.Log($"Added Grabbable to {obj.name}");
+        Debug.Log($"✓ Added Grabbable to {obj.name}");
 
         // 4. Create Child Interaction GameObject
         GameObject interactionChild = new GameObject("ISDK_HandGrabInteraction");
@@ -196,7 +252,7 @@ public class ProductStocker : EditorWindow
         soGrabInteractable.FindProperty("_rigidbody").objectReferenceValue = rb;
         soGrabInteractable.ApplyModifiedProperties();
 
-        Debug.Log($"✓ Made {obj.name} grabbable with Hand & Controller support");
+        Debug.Log($"✓✓✓ Made {obj.name} grabbable with Hand & Controller support");
     }
 
     void ApplyZAlignment(GameObject obj)
@@ -228,7 +284,22 @@ public class ProductStocker : EditorWindow
         Debug.Log($"Aligned {obj.name}: Y offset={pushAmountY:F4}m, Z offset={pushAmountZ:F4}m");
     }
 
+    void AddProductData(GameObject obj, Transform slot)
+    {
+        ProductData productData = Undo.AddComponent<ProductData>(obj);
 
+        // Extract numeric ID from slot name (e.g., "Slot_12" -> 12)
+        string slotName = slot.gameObject.name;
+        if (int.TryParse(System.Text.RegularExpressions.Regex.Match(slotName, @"\d+").Value, out int id))
+        {
+            productData.productID = id;
+            Debug.Log($"Assigned Product ID: {id} to {obj.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"Could not parse ID from slot name: {slotName}");
+        }
+    }
     int CompareNatural(string a, string b)
     {
         return EditorUtility.NaturalCompare(a, b);
